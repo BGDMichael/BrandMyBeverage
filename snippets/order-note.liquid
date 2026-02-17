@@ -1,0 +1,40 @@
+{% assign num_colors = order.metafields.custom.number_of_colors %}
+{% assign color_names = order.metafields.custom.color_names %}
+{% assign imprint_location = order.metafields.custom.imprint_location %}
+{% assign artwork = order.metafields.custom.artwork %}
+{% assign special_instructions = order.metafields.custom.special_instructions %}
+{% assign due_date = order.metafields.custom.due_date %}
+
+{% assign note = "" %}
+
+{% if num_colors or color_names %}
+  {% assign note = note | append: "NUMBER OF COLORS: " %}
+  {% if num_colors %}
+    {% assign note = note | append: num_colors %}
+  {% endif %}
+  {% if color_names %}
+    {% assign note = note | append: " - " | append: color_names %}
+  {% endif %}
+  {% assign note = note | append: " || " %}
+{% endif %}
+
+{% if imprint_location or artwork %}
+  {% assign note = note | append: "IMPRINT LOCATION AND ART: " %}
+  {% if imprint_location %}
+    {% assign note = note | append: imprint_location %}
+  {% endif %}
+  {% if artwork %}
+    {% assign note = note | append: " - " | append: artwork %}
+  {% endif %}
+  {% assign note = note | append: " || " %}
+{% endif %}
+
+{% if special_instructions %}
+  {% assign note = note | append: "SPECIAL INSTRUCTIONS: " | append: special_instructions | append: " || " %}
+{% endif %}
+
+{% if due_date %}
+  {% assign note = note | append: "Due Date: " | append: due_date %}
+{% endif %}
+
+{{ note }} 
